@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-lg-12 text-center heading">
+        Results
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-8 col-md-8 col-sm-8 pd-0">
+        <div *ngFor="let obj of createdQuizQues; index as i">
+            <div class="quesCls">{{obj.question}}</div>
+            <form>
+                <fieldset>
+                    <div id="group{{i+1}}">
+                        <div class="answersGroup" *ngFor="let answer of obj.allOptions" [ngClass]="obj.correct_answer === answer ? 'correct' : ''">
+                            <label [ngClass]="(submittedAnswers[i] === answer && submittedAnswers[i] !== obj.correct_answer) ? 'incorrect': ''">{{answer}}</label>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-1"></div>
+</div>
+<div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-8 pd-0">
+        <div class="resultStatus" [ngClass]="{'red': getCorrectAnswersCount() <= 1, 'yellow':(getCorrectAnswersCount() <=3 && getCorrectAnswersCount() >=2), 'green': getCorrectAnswersCount() >= 4}">You scored {{getCorrectAnswersCount()}} out of {{createdQuizQues.length}}</div>
+        <div class="pdb-10"><button (click)="navToCreateQuiz()">Create a new quiz</button></div>
+    </div>
+    <div class="col-lg-1"></div>
+</div>

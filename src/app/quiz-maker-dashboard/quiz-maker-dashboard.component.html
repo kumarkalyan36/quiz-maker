@@ -3,17 +3,16 @@
         Quiz Maker
     </div>
 </div>
-<div class="row">
+<div class="row pdb-20">
     <div class="col-lg-3"></div>
     <div class="col-lg-3 col-md-3 col-sm-3 pd-0">
-        <select id="categorySelect" class="dropdownCls">
+        <select id="categorySelect" class="dropdownCls" [(ngModel)]="selectedCategory">
             <option value="" disabled selected>Select a category</option>
-            <option>test1</option>
-            <option>test2</option>
+            <option *ngFor="let option of categoriesData" value="{{option.id}}">{{option.name}}</option>
         </select>
     </div>
     <div class="col-lg-3 col-md-3 col-sm-3 pd-0">
-        <select id="difficultySelect" class="dropdownCls">
+        <select id="difficultySelect" class="dropdownCls" [(ngModel)]="selectedDifficulty">
             <option value="" disabled selected>Select difficulty</option>
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
@@ -21,7 +20,28 @@
         </select>
     </div>
     <div class="col-lg-2 pd-0">
-        <button id="createBtn">Create</button>
+        <button id="createBtn" (click)="createQuiz()">Create</button>
+    </div>
+    <div class="col-lg-1"></div>
+</div>
+<div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-8 col-md-8 col-sm-8 pd-0">
+        <div *ngFor="let obj of quizQuestions; index as i">
+            <div class="quesCls">{{obj.question}}</div>
+            <div>
+                <form>
+                    <fieldset id="group{{i+1}}">
+                        <div class="answersGroup" *ngFor="let answer of obj.allOptions">
+                            <input type="radio" value="{{answer}}" id="{{answer}}" name="group{{i+1}}" [(ngModel)]="selectedOption[i]">
+                            <label for="{{answer}}">{{answer}}</label>
+                        </div>
+                    </fieldset>
+                </form>
+                
+            </div>
+        </div>
+        <button *ngIf="checkOptionSelection()" (click)="submit()">Submit</button>
     </div>
     <div class="col-lg-1"></div>
 </div>

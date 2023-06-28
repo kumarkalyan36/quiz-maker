@@ -1,23 +1,13 @@
+.pd-0 {
+    padding: 0px;
+}
+
 .heading {
     font-size: 18px;
     font-weight: bold;
     padding-top: 20px;
     padding-bottom: 20px;
 }
-
-.dropdownCls {
-    width: 100%;
-    padding: 6px;
-}
-
-#createBtn {
-    padding: 4px 10px;
-}
-
-.pd-0 {
-    padding: 0px;
-}
-
 
 .answersGroup {
     float: left;
@@ -27,8 +17,7 @@
     position: relative;
 }
 
-.answersGroup label,
-.answersGroup input {
+.answersGroup label {
     display: block;
     position: absolute;
     top: 0;
@@ -37,31 +26,23 @@
     bottom: 0;
 }
 
-.answersGroup input[type="radio"] {
-    opacity: 0.01;
-    z-index: 100;
+.correct > label {
+    background: green;
+    color: white !important;
 }
 
-.answersGroup input[type="radio"]:checked+label,
-.Checked+label {
-    background: green;
-    color: white;
+.incorrect {
+    background: red;
+    color: white !important;
 }
 
 .answersGroup label {
     padding: 5px;
     border: 1px solid green;
-    cursor: pointer;
     z-index: 90;
     border-radius: 6px;
     color: green;
     font-weight: normal;
-}
-
-.answersGroup label:hover,
-.answersGroup input:hover {
-    background: green;
-    color: white;
 }
 
 .pdb-20 {
@@ -70,4 +51,24 @@
 .quesCls {
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+.red {
+    background-color: red;
+}
+.yellow {
+    background-color: yellow;
+}
+.green {
+    background-color: green;
+}
+
+.resultStatus {
+    margin-top: 15px;
+    padding: 6px 10px;
+    font-weight: bold;
+}
+
+.pdb-10 {
+    padding-top: 15px;
 }
