@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MainService } from '../services/main.service';
 import { tap, takeUntil, Subject } from 'rxjs';
-import { CategoryList, QuizQuestion } from '../types/quiz-maker-type';
+import { CategoryList, QuizCategoryResponse, QuizQuestion, QuizQuestionResponse } from '../types/quiz-maker-type';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,6 +15,8 @@ export class QuizMakerDashboardComponent implements OnInit {
   selectedDifficulty: string = '';
   quizQuestions: Array<QuizQuestion> = [];
   selectedOption: Array<string> = [];
+  isSubmit: boolean = false;
+  loader: boolean = false;
   public destroyed: Subject<boolean> = new Subject();
   constructor(private mainService: MainService,
               private router: Router
@@ -25,20 +27,28 @@ export class QuizMakerDashboardComponent implements OnInit {
   }
 
   getCategoriesList() {
-    this.mainService.getCategories().pipe(tap((data: any) => {
+    this.mainService.getCategories().subscribe((res) => {
+      const data = <QuizCategoryResponse> res;
       this.categoriesData = data.trivia_categories;
-    }), takeUntil(this.destroyed)).subscribe();
+    });
   }
 
   createQuiz() {
-    const url = 'https://opentdb.com/api.php?amount=5&category=' + this.selectedCategory + '&difficulty=' + this.selectedDifficulty + '&type=multiple';
-    this.mainService.createQuiz(url).pipe(tap((data: any) => {
-      this.quizQuestions = data.results;
-      this.quizQuestions.map((obj) => {
-        obj['allOptions'] = this.shuffleArray([...obj.incorrect_answers, ...[obj.correct_answer]]);
+    this.isSubmit = true;
+    if(this.selectedCategory !='' && this.selectedDifficulty != '') {
+      this.loader = true;
+      const url = 'https://opentdb.com/api.php?amount=5&category=' + this.selectedCategory + '&difficulty=' + this.selectedDifficulty + '&type=multiple';
+      this.mainService.createQuiz(url).subscribe((res) => {
+        this.isSubmit = false;
+        this.loader = false;
+        const data = <QuizQuestionResponse>res;
+        this.quizQuestions = data.results;
+        this.quizQuestions.map((obj) => {
+          obj['allOptions'] = this.shuffleArray([...obj.incorrect_answers, ...[obj.correct_answer]]);
+        });
+        this.selectedOption = [];
       });
-      this.selectedOption = [];
-    }), takeUntil(this.destroyed)).subscribe();
+    }
   }
 
   shuffleArray(arr: Array<string>) {
@@ -46,7 +56,6 @@ export class QuizMakerDashboardComponent implements OnInit {
       const j = Math.floor(Math.random() * (i + 1));
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
-    console.log(arr);
     return arr;
   }
 

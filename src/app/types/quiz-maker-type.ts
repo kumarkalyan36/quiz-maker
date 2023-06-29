@@ -12,3 +12,12 @@ export interface QuizQuestion {
     type: string,
     allOptions: Array<string>
 }
+
+export interface QuizQuestionResponse {
+    response_code: number,
+    results: Array<QuizQuestion>
+}
+
+export interface QuizCategoryResponse {
+    trivia_categories: Array<CategoryList>
+}

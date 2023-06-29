@@ -25,7 +25,7 @@
     <div class="col-lg-3"></div>
     <div class="col-lg-8 pd-0">
         <div class="resultStatus" [ngClass]="{'red': getCorrectAnswersCount() <= 1, 'yellow':(getCorrectAnswersCount() <=3 && getCorrectAnswersCount() >=2), 'green': getCorrectAnswersCount() >= 4}">You scored {{getCorrectAnswersCount()}} out of {{createdQuizQues.length}}</div>
-        <div class="pdb-10"><button (click)="navToCreateQuiz()">Create a new quiz</button></div>
+        <div class="pdb-10 text-center"><button (click)="navToCreateQuiz()" class="buttonCls">Create a new quiz</button></div>
     </div>
     <div class="col-lg-1"></div>
 </div>

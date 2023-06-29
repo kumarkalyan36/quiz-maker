@@ -10,6 +10,7 @@
             <option value="" disabled selected>Select a category</option>
             <option *ngFor="let option of categoriesData" value="{{option.id}}">{{option.name}}</option>
         </select>
+        <div *ngIf="isSubmit && selectedCategory== ''" class="errorCls">Please Select Category</div>
     </div>
     <div class="col-lg-3 col-md-3 col-sm-3 pd-0">
         <select id="difficultySelect" class="dropdownCls" [(ngModel)]="selectedDifficulty">
@@ -18,6 +19,7 @@
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
         </select>
+        <div *ngIf="isSubmit && selectedDifficulty== ''" class="errorCls">Please Select difficulty</div>
     </div>
     <div class="col-lg-2 pd-0">
         <button id="createBtn" (click)="createQuiz()">Create</button>
@@ -41,7 +43,15 @@
                 
             </div>
         </div>
-        <button *ngIf="checkOptionSelection()" (click)="submit()">Submit</button>
+        
+    </div>
+    <div class="col-lg-1"></div>
+</div>
+<div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-8 col-md-8 col-sm-8 pd-0 text-center quesCls">
+        <div *ngIf="loader"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></div>
+        <button *ngIf="checkOptionSelection()" (click)="submit()" class="buttonCls">Submit</button>
     </div>
     <div class="col-lg-1"></div>
 </div>

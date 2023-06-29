@@ -71,3 +71,17 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
+.errorCls {
+    color: red;
+}
+.buttonCls {
+    border: none;
+    background: gray;
+    padding: 8px 10px;
+    width: 50%;
+    border-radius: 6px;
+    color: white;
+}
+.text-center {
+    text-align: center;
+}

@@ -72,3 +72,14 @@
 .pdb-10 {
     padding-top: 15px;
 }
+.buttonCls {
+    border: none;
+    background: gray;
+    padding: 8px 10px;
+    width: 50%;
+    border-radius: 6px;
+    color: white;
+}
+.text-center {
+    text-align: center;
+}
