@@ -1,18 +1,18 @@
-<div class="row">
+<div class="row mr-0">
     <div class="col-lg-12 text-center heading">
         Quiz Maker
     </div>
 </div>
-<div class="row pdb-20">
+<div class="row pdb-20 mr-0">
     <div class="col-lg-3"></div>
-    <div class="col-lg-3 col-md-3 col-sm-3 pd-0">
+    <div class="col-lg-3 col-md-3 pd-0">
         <select id="categorySelect" class="dropdownCls" [(ngModel)]="selectedCategory">
             <option value="" disabled selected>Select a category</option>
             <option *ngFor="let option of categoriesData" value="{{option.id}}">{{option.name}}</option>
         </select>
         <div *ngIf="isSubmit && selectedCategory== ''" class="errorCls">Please Select Category</div>
     </div>
-    <div class="col-lg-3 col-md-3 col-sm-3 pd-0">
+    <div class="col-lg-3 col-md-3 pd-0">
         <select id="difficultySelect" class="dropdownCls" [(ngModel)]="selectedDifficulty">
             <option value="" disabled selected>Select difficulty</option>
             <option value="easy">Easy</option>
@@ -26,9 +26,9 @@
     </div>
     <div class="col-lg-1"></div>
 </div>
-<div class="row">
+<div class="row mr-0" >
     <div class="col-lg-3"></div>
-    <div class="col-lg-8 col-md-8 col-sm-8 pd-0">
+    <div class="col-lg-8 col-md-8 pd-0">
         <div *ngFor="let obj of quizQuestions; index as i">
             <div class="quesCls">{{obj.question}}</div>
             <div>
@@ -47,9 +47,9 @@
     </div>
     <div class="col-lg-1"></div>
 </div>
-<div class="row">
+<div class="row mr-0">
     <div class="col-lg-3"></div>
-    <div class="col-lg-8 col-md-8 col-sm-8 pd-0 text-center quesCls">
+    <div class="col-lg-8 col-md-8 pd-0 text-center quesCls">
         <div *ngIf="loader"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></div>
         <button *ngIf="checkOptionSelection()" (click)="submit()" class="buttonCls">Submit</button>
     </div>
