@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SecurityContext } from '@angular/core';
 import { MainService } from '../services/main.service';
 import { tap, takeUntil, Subject } from 'rxjs';
 import { CategoryList, QuizCategoryResponse, QuizQuestion, QuizQuestionResponse } from '../types/quiz-maker-type';
 import { Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-quiz-maker-dashboard',
@@ -19,7 +20,8 @@ export class QuizMakerDashboardComponent implements OnInit {
   loader: boolean = false;
   public destroyed: Subject<boolean> = new Subject();
   constructor(private mainService: MainService,
-              private router: Router
+              private router: Router,
+              private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -49,6 +51,10 @@ export class QuizMakerDashboardComponent implements OnInit {
         this.selectedOption = [];
       });
     }
+  }
+
+  returnSafeHtml(convertString: string) {
+    return this.sanitizer.bypassSecurityTrustHtml(convertString);
   }
 
   shuffleArray(arr: Array<string>) {

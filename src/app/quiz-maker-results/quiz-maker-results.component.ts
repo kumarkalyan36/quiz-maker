@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MainService } from '../services/main.service';
 import { QuizQuestion } from '../types/quiz-maker-type';
 import { Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-quiz-maker-results',
@@ -12,7 +13,8 @@ export class QuizMakerResultsComponent implements OnInit{
     createdQuizQues: Array<QuizQuestion> = [];
     submittedAnswers: Array<string> = [];
     constructor(private mainService: MainService,
-                private router: Router
+                private router: Router,
+                private sanitizer: DomSanitizer
     ) {
     }
 
@@ -33,5 +35,9 @@ export class QuizMakerResultsComponent implements OnInit{
 
     navToCreateQuiz() {
       this.router.navigate(['/quizdashboard']);
+    }
+
+    returnSafeHtml(convertString: string) {
+      return this.sanitizer.bypassSecurityTrustHtml(convertString);
     }
 }

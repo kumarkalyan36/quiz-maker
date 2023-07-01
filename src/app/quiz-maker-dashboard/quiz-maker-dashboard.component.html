@@ -30,13 +30,13 @@
     <div class="col-lg-3"></div>
     <div class="col-lg-8 col-md-8 pd-0">
         <div *ngFor="let obj of quizQuestions; index as i">
-            <div class="quesCls">{{obj.question}}</div>
+            <div class="quesCls" [innerHTML]="returnSafeHtml(obj.question)"></div>
             <div>
                 <form>
                     <fieldset id="group{{i+1}}">
                         <div class="answersGroup" *ngFor="let answer of obj.allOptions">
                             <input type="radio" value="{{answer}}" id="{{answer}}" name="group{{i+1}}" [(ngModel)]="selectedOption[i]">
-                            <label for="{{answer}}">{{answer}}</label>
+                            <label for="{{answer}}" [innerHTML]="returnSafeHtml(answer)"></label>
                         </div>
                     </fieldset>
                 </form>
